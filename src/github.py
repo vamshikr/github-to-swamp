@@ -45,7 +45,7 @@ def event_handler(event):
     commit_hash = msg['after']
     archive_url = msg['repository']['archive_url']
     full_name = msg['repository']['full_name']
-    archive_url = 'https://api.github.com/repos/vamshikr/java-api/{archive_format}{/ref}'.replace('/ref', 'master')
+    archive_url = archive_url.replace('/ref', 'master')
     archive_url = archive_url.format(archive_format='zipball/', master='master')
     archive_name = '{0}-{1}.zip'.format(full_name.replace('/', '-'), commit_hash[:7])
     return (archive_url, archive_name, commit_hash[:7])

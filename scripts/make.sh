@@ -3,7 +3,7 @@
 # Makes release/github-to-swamp.zip 
 
 function main {
-    local pdir=$(dirname 0)
+    local pdir=$(dirname $(dirname 0))
 
     local release_dir="$pdir/release"
     mkdir -p "$release_dir"
@@ -24,7 +24,7 @@ function main {
                 cp -r swamp-python-api-master/src/swamp_api .
         fi
 
-        cp ../lambda_function.py ../github.py ../user-info.conf .
+        cp ../src/lambda_function.py ../src/github.py ../resources/user-info.conf .
         
         zip -0 -r github-to-swamp.zip \
             lambda_function.py \
@@ -37,7 +37,7 @@ function main {
             find . -mindepth 1 -type d | xargs rm -rf
             find . ! -name github-to-swamp.zip -delete
         fi
-            
+
     )
 }
 

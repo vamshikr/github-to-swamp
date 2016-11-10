@@ -2,12 +2,37 @@
 
 # Makes release/github-to-swamp.zip 
 
-function main {
-    local pdir=$(dirname $(dirname 0))
+function get_prop { 
+    local PROP="$1";
+    local FILENAME="$2";
 
+    local SED_REGEX_OPT="-r";
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+        SED_REGEX_OPT="-E";
+    fi;
+    sed -n "$SED_REGEX_OPT" \
+        "s/^[[:blank:]]*$PROP[[:blank:]]*=[[:blank:]]*(.+)[[:blank:]]*/\1/p" \
+        "$FILENAME"
+}
+
+
+function main {
+    local pdir="$(dirname $(dirname 0))"
+
+    local user_conf_file="$pdir/resources/user-info.conf"
+    local username="$(get_prop username $user_conf_file)"
+    local password="$(get_prop password $user_conf_file)"
+    local project="$(get_prop project $user_conf_file)"
+
+    if [[ -z "$username" || -z "$password" || -z "$project" ]]; then
+        echo "$user_conf_file needs to have SWAMP username, password, project" && \
+            exit 1;
+    fi
+        
     local release_dir="$pdir/release"
     mkdir -p "$release_dir"
 
+    
     (
         cd "$release_dir"
     
@@ -27,8 +52,9 @@ function main {
             echo "$failed to get 'swamp_api (https://github.com/vamshikr/swamp-python-api)' library" && exit 1;
         fi
 
-        cp ../src/lambda_function.py ../src/github.py ../resources/user-info.conf .
-        
+
+
+        cp ../src/lambda_function.py ../src/github.py ../resources/user-info.conf .        
         zip -0 -r github-to-swamp.zip \
             lambda_function.py \
             github.py \

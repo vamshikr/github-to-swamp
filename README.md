@@ -53,7 +53,7 @@ The `scripts/upload.sh`needs the *AWS lambda function name* and *AWS configurati
 
 Add a file named `package.conf` in the top-level directory of your GitHub project. The contents of the `package.conf` file must look like this
 ```sh
-package-short-name=<filed-in-by-lambda-function>
+package-short-name=my-java-pkg
 package-version=<filed-in-by-lambda-function>
 package-archive=<filed-in-by-lambda-function>
 package-dir=<filed-in-by-lambda-function>

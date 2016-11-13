@@ -6,7 +6,7 @@ This is an attempt to have a SWAMP integration for GitHub project (like Travis C
 
 It is done this way:
 
-1. For a github project, setup an [Amazon's Simple Notification Service (AWS SNS)](https://aws.amazon.com/sns/) service for events (like *push*). GitHub services are pre-built integrations that perform certain actions when events occur on GitHub. For details on services, go to your GitHub project home page (you must be an admin for the project) >> settings >> integrations & services https://github.com/vamshikr/java-api/settings/installations).
+1. For a github project, setup an [Amazon's Simple Notification Service (AWS SNS)](https://aws.amazon.com/sns/) service for events (like *push*). GitHub services are pre-built integrations that perform certain actions when events occur on GitHub. For details on services, go to your GitHub project home page (you must be an admin for the project) >> settings >> integrations & services.
 
 1. When an event like (git push) happens for the registered GitHub project, GitHub sends a **event notification** using AWS SNS to a registered end point, in this case it is the AWS Lambda function `github-to-swamp` (this project).
 

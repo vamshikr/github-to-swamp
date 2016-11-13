@@ -47,6 +47,25 @@ The script uses AWS CLI. You can install AWS CLI by running `pip install awscli`
 
 The `scripts/upload.sh`needs the *AWS lambda function name* and *AWS configuration profile name* as argument. There is an optional third argument for *AWS region* which defaults to *us-west-2*.
 
+#### Package.conf in GitHub Project
+
+Add a file named `package.conf` in the top-level directory of your GitHub project. The contents of the `package.conf` file must look like this
+```sh
+package-short-name=<filed-in-by-lambda-function>
+package-version=<filed-in-by-lambda-function>
+package-archive=<filed-in-by-lambda-function>
+package-dir=<filed-in-by-lambda-function>
+package-language=Java
+# supported ant, ant+ivy, maven, gradle
+build-sys=maven
+build-file=pom.xml
+build-target=clean install
+build-opt=-DskipTests -Dmaven.test.skip
+config-cmd=mvn
+config-opt=clean
+config-dir=.
+```
+
 #### Test
 Users can test/trigger the AWS lambda function using AWS web interface or the command line using `./scripts/invoke.sh`.
 

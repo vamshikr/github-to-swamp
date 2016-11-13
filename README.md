@@ -2,7 +2,7 @@
 
 This is an attempt to have a SWAMP integration for GitHub project (like Travis CI and all of these: https://github.com/integrations).  This is accomplished using [AWS Lambda](https://aws.amazon.com/lambda/)
 
-* This is not an official SWAMP project *
+> This is not an official SWAMP project
 
 It is done this way:
 
